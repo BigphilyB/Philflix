@@ -2,11 +2,16 @@ import React from 'react';
 import './styles.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AddIcon from '@material-ui/icons/Add';
-
+//Laad nieuwste film voor de bovenkant
 function FeaturedMovie( { item } ) {
 
+    //Haalt Date uit Json die dan
   let firstDate = new Date(item.first_air_date);
+
+  //Maakt genres leeg omdat het niet van toepassing is
   let genres = [];
+
+
   for(let i in item.genres){
     genres.push(item.genres[i].name);
   }
@@ -43,4 +48,5 @@ function FeaturedMovie( { item } ) {
   );
 }
 
+//Stuurd all data deeltjes van de feutured movie naar de detail pagina
 export default FeaturedMovie;

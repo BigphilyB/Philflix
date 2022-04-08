@@ -5,9 +5,9 @@ import FeaturedMovie from '../../components/FeaturedMovie';
 import Header from '../../components/Header';
 
 import './styles.css';
-
+//Dit is de functie die de pagina genereerd 
 function Home() {
-
+//
   const [featuredData, setFeaturedData] = useState(null);
   const [movieList, setMovieList] = useState([]);
   const [blackHeader, setBlackHeader] = useState(false);
@@ -74,13 +74,12 @@ function Home() {
             <img alt="Themoviedb.org" width="42" src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"/>
           </a>
         </div>
-        Feito com <span role="img" aria-label="Coração">❤️ por <a href="https://github.com/mcosta21" target="_blank" rel="noopener noreferrer">Marcio Costa</a></span>
       </footer>
       
       {
         movieList.length <= 0 &&
         <div className="loading">
-          <img alt="Carregando" src="https://media.wired.com/photos/592744d3f3e2356fd800bf00/master/w_2000,c_limit/Netflix_LoadTime.gif"/>
+          <img alt="Carregando" src="https://i.imgflip.com/59mzsv.gif"/>
         </div>
       }      
 

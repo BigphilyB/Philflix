@@ -12,7 +12,7 @@ function Header( { black } ) {
         </div>
         <div className="header--user">
           <a href="/">
-            <img alt="Usuário" src="https://learning.royalbcmuseum.bc.ca/wp-content/uploads/2014/07/netflix-face.jpg" />
+            <img alt="User" src="https://learning.royalbcmuseum.bc.ca/wp-content/uploads/2014/07/netflix-face.jpg" />
           </a>
         </div>
     </header>

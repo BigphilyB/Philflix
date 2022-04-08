@@ -1,23 +1,15 @@
+
+//HIER WORD DE API OPGEROEPEN
 const API_KEY = 'b07d99cb0e7cbba9c64d7c9c6f826c78';
 const API_BASE = 'https://api.themoviedb.org/3';
 
-/*
-    - Originais da Netflix
-    - Recomendados (Trending)
-    - Em alta (Top rated)
-    - Ação
-    - Comédia
-    - Terror
-    - Romance
-    - Documentários
-*/
-
+//Hier word het API JSON bestand gefetched
 const basicFetch = async (endpoint) => {
     const req = await fetch(`${API_BASE}${endpoint}`);
     const json = await req.json();
     return json;
 }
-
+// Hier worden de json bestanden naar alle index.js's van de verschilende modules
 export default {
     getHomeList: async () => {
         return [
