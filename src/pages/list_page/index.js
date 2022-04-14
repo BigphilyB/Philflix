@@ -14,7 +14,7 @@ function Home() {
 
 
 
-  //haalt uit de movie database (Tmdb) alleen films met de netflix originals kopje data
+  //
   useEffect(() => {
     const loadAll = async () => {
       let list = await Tmdb.getHomeList();
