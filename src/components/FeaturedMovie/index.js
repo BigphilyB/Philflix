@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 function FeaturedMovie( { item, state, setState } ) {
 
     const addToList = () => {
+        console.log(state)
         if(!state.hasOwnProperty("results")) {
             console.log("RESULTS EMPTY");
             state = {results: []}

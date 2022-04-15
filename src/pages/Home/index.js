@@ -3,6 +3,7 @@ import Tmdb from '../../Tmdb';
 import MovieRow from '../../components/MovieRow';
 import FeaturedMovie from '../../components/FeaturedMovie';
 import Header from '../../components/Header';
+import { useStickyState } from '../../sticky-state';
 
 import './styles.css';
 //Dit is de functie die de pagina genereerd 
@@ -10,7 +11,7 @@ function Home() {
 //JSX variable worden hier gevuld met de JSON data.
   const [featuredData, setFeaturedData] = useState(null);
   const [movieList, setMovieList] = useState([]);
-  const [watchList, setWatchList] = useState({results:[]});
+  const [watchList, setWatchList] = useStickyState({results:[]}, 'watchList');
   const [blackHeader, setBlackHeader] = useState(false);
 
 
