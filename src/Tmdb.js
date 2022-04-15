@@ -21,7 +21,7 @@ export default {
             },
             {
                 slug: 'trending',
-                title: 'recommended for you',
+                title: 'Recommended for you',
                 type: 'tv',
                 items: await basicFetch(`/trending/all/week?language=en-BR&api_key=${API_KEY}`)
             }, 

@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 
 
 //Maakts cells aan
-function MovieRow( { title, items, type } ) {
+function MovieRow( { title, items, type, addToWatchListEnabled = false } ) {
 
-  const [scrollX, setScrollX] = useState(-400);
+  const [scrollX, setScrollX] = useState(0);
 
 
-  //Zorgt wervoor dat de X as veranderd zodat de row naar links haat
+  //Zorgt wervoor dat de X as veranderd zodat de row naar links gaat
   const handleLeftArrow = () => {
     let x = scrollX + Math.round(window.innerWidth / 2);
     if(x > 0){
@@ -20,8 +20,7 @@ function MovieRow( { title, items, type } ) {
     setScrollX(x);
   }
 
-  //Zorgt ervoor dat de X as veranderd zodat de row naar Rechts gaat haat
-
+  //Zorgt ervoor dat de X as veranderd zodat de row naar Rechts gaat
   const handleRightArrow = () => {
     let x = scrollX - Math.round(window.innerWidth / 2);
     let listW = items.results.length * 200;

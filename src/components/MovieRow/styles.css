@@ -10,6 +10,7 @@
 .movieRow--listarea {
     overflow-x: hidden;
     margin-left: 40px;
+    min-height: 304px;
 }
 
 .movieRow--list {

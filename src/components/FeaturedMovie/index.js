@@ -3,7 +3,16 @@ import './styles.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AddIcon from '@material-ui/icons/Add';
 //Laad nieuwste film voor de bovenkant
-function FeaturedMovie( { item } ) {
+function FeaturedMovie( { item, state, setState } ) {
+
+    const addToList = () => {
+        if(!state.hasOwnProperty("results")) {
+            console.log("RESULTS EMPTY");
+            state = {results: []}
+        }
+        state.results.push(item);
+        setState(state);
+    };
 
     //Haalt Date uit Json die dan
   let firstDate = new Date(item.first_air_date);
@@ -38,8 +47,8 @@ function FeaturedMovie( { item } ) {
 
                 <div className="featured--description">{description}</div>
                 <div className="featured--buttons">
-                    <a disabled className="featured--watchbutton"><div><PlayArrowIcon /> Play</div></a>
-                    <a disabled className="featured--mylistbutton"><div><AddIcon />Add to list</div></a>
+                    <a href="#" className="featured--watchbutton"><div><PlayArrowIcon /> Play</div></a>
+                    <a href="#" onClick={addToList} className="featured--mylistbutton"><div><AddIcon />Add to list</div></a>
                 </div>
                 <div className="featured--genres"><strong>Genres:</strong> {genres.join(', ')}</div>
             </div>

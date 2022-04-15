@@ -10,21 +10,32 @@ function Home() {
 //JSX variable worden hier gevuld met de JSON data.
   const [featuredData, setFeaturedData] = useState(null);
   const [movieList, setMovieList] = useState([]);
+  const [watchList, setWatchList] = useState({results:[]});
   const [blackHeader, setBlackHeader] = useState(false);
 
 
+  // Get en Save Watchlist in localstorage
+
+  useEffect(() => {
+    setWatchList(JSON.parse(window.localStorage.getItem('watchlist')));
+  },[]);
+
+  useEffect(() => {
+    window.localStorage.setItem('watchlist', JSON.stringify(watchList));
+  }, [watchList]);
 
   //haalt uit de movie database (Tmdb) alleen films met de netflix originals kopje data
   useEffect(() => {
     const loadAll = async () => {
-      let list = await Tmdb.getHomeList();
-      setMovieList(list);
+      //Definieerd list met getHomeList wat een functie elders is die json ophaald uit Tmdb
+      const completeList = await Tmdb.getHomeList();
+      setMovieList(completeList);
 
-      let originals = list.filter(i => i.slug === 'originals');
-      let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1));
-      let movieChosen = originals[0].items.results[randomChosen];
-      
-      let movieChosenData = await Tmdb.getMovieInfo(movieChosen.id, 'tv');
+      //Pakt data onder de catagorie en dan mixt de films in een .random volgworden 
+      const originals = completeList.filter(i => i.slug === 'originals')[0];
+      const randomChosen = Math.floor(Math.random() * (originals.items.results.length - 1));
+      const movieChosen = originals.items.results[randomChosen];
+      const movieChosenData = await Tmdb.getMovieInfo(movieChosen.id, 'tv');
       setFeaturedData(movieChosenData);
     }
 
@@ -56,14 +67,16 @@ function Home() {
 
       {
         featuredData &&
-        <FeaturedMovie item={featuredData}/>
+        <FeaturedMovie item={featuredData} state={watchList} setState={setWatchList} />
       }
-      
 
       <section className="lists">
+        { watchList?.results.length > 0 &&
+        <MovieRow title="Watchlist" items={watchList} type="tv" />
+        } 
         {
           movieList.map((item, key) => (
-            <MovieRow key={key} title={item.title} items={item.items} type={item.type} />
+            <MovieRow key={key} title={item.title} items={item.items} type={item.type} addToWatchListEnabled={true} />
           ))
         }
       </section>
