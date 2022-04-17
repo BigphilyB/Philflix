@@ -9,13 +9,13 @@ const basicFetch = async (endpoint) => {
     const json = await req.json();
     return json;
 }
-// Hier worden de json bestanden naar alle index.js's van de verschilende modules
+// Hier worden de json bestanden naar alle index.js's gestuurd dus movie rows en detail paginas
 export default {
     getHomeList: async () => {
         return [
             {
                 slug: 'originals',
-                title: 'Originais do Netflix',
+                title: 'Original Netflix films en series',
                 type: 'tv',
                 items: await basicFetch(`/discover/tv?with_network=213&language=en-BR&api_key=${API_KEY}`)
             },

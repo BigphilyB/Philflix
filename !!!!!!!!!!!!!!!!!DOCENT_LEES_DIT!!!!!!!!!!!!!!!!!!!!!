@@ -1,0 +1,9 @@
+WAT IK HEB VERANDERD VERGELEKEN MET VORIGE KEER!!!!!!!!!!!
+
+
+Ik heb add to list functie toegevoegd en werkend gemaakt door het als een soort Key value op te slaan in de local storage (Ga naar inspector kopje Application en dan onder Local storage )
+Met behulp van JSON en sticky. Check /sticky-state.JSON.
+
+ervoor gezorgd dat watchlist niet te zien is als er geen films in staan
+
+Ook heb ik daar veel mee getest en dat opgeschreven in TEST_REPORTS.txt

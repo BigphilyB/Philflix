@@ -23,7 +23,7 @@ function MovieRow( { title, items, type, addToWatchListEnabled = false } ) {
   //Zorgt ervoor dat de X as veranderd zodat de row naar Rechts gaat
   const handleRightArrow = () => {
     let x = scrollX - Math.round(window.innerWidth / 2);
-    let listW = items.results.length * 200;
+    let listW = items.length > 0 ? items.length * 200 : 200;
     if((window.innerWidth - listW) > x){
         x = (window.innerWidth - listW) - 80;  
     }
@@ -43,18 +43,16 @@ function MovieRow( { title, items, type, addToWatchListEnabled = false } ) {
         </div>
 
         <div className="movieRow--listarea">
+
           <div 
             className="movieRow--list"
             style={{
               marginLeft: scrollX,
-              width: items.results.length * 200
+              width: items.length * 200
             }}
           >
             {
-              items.results.length > 0 &&
-              items.results.map((item, key) => (
-                
-                item.poster_path !== null &&
+              items.map((item, key) => (
                     <div key={key} className="movieRow--item">
                       <Link to={`/details/${type}/${item.id}`}>
                         <img alt={item.original_title} src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} />
@@ -63,6 +61,7 @@ function MovieRow( { title, items, type, addToWatchListEnabled = false } ) {
               ))
             }
           </div>
+      {/* } */}
         </div>
     </div>
   );

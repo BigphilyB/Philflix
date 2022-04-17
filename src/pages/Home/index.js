@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Tmdb from '../../Tmdb';
 import MovieRow from '../../components/MovieRow';
 import FeaturedMovie from '../../components/FeaturedMovie';
@@ -11,19 +11,8 @@ function Home() {
 //JSX variable worden hier gevuld met de JSON data.
   const [featuredData, setFeaturedData] = useState(null);
   const [movieList, setMovieList] = useState([]);
-  const [watchList, setWatchList] = useStickyState({results:[]}, 'watchList');
+  const [watchList, setWatchList] = useStickyState([], 'watchList');
   const [blackHeader, setBlackHeader] = useState(false);
-
-
-  // Get en Save Watchlist in localstorage
-
-  useEffect(() => {
-    setWatchList(JSON.parse(window.localStorage.getItem('watchlist')));
-  },[]);
-
-  useEffect(() => {
-    window.localStorage.setItem('watchlist', JSON.stringify(watchList));
-  }, [watchList]);
 
   //haalt uit de movie database (Tmdb) alleen films met de netflix originals kopje data
   useEffect(() => {
@@ -42,7 +31,7 @@ function Home() {
 
     loadAll();
   }, []);
-
+//scroll functie
   useEffect(() => {
     const scrollListener = () => {
       if(window.scrollY > 10) {
@@ -52,7 +41,7 @@ function Home() {
         setBlackHeader(false);
       }
     }
-
+    //Scroll listener
     window.addEventListener('scroll', scrollListener);
 
     return () => {
@@ -60,30 +49,34 @@ function Home() {
     }
 
   }, []);
-
+//return functie 
   return (
     <div className="page">
-      
       <Header black={blackHeader}/>
 
       {
         featuredData &&
-        <FeaturedMovie item={featuredData} state={watchList} setState={setWatchList} />
+        <FeaturedMovie movie={featuredData} watchList={watchList} setWatchList={setWatchList} />
       }
 
-      <section className="lists">
-        { watchList?.results.length > 0 &&
+      <section className="lists"
+      //Watchlist is alleen toonbaar als er meer dan 0 items in staan
+      >
+        { watchList?.length > 0 &&
         <MovieRow title="Watchlist" items={watchList} type="tv" />
         } 
         {
           movieList.map((item, key) => (
-            <MovieRow key={key} title={item.title} items={item.items} type={item.type} addToWatchListEnabled={true} />
+            <MovieRow key={key} title={item.title} items={item.items.results} type={item.type} addToWatchListEnabled={true} />
           ))
         }
       </section>
+      
 
       <footer>
-        <div>
+        <div
+        //Links naar Netlflix en MovieDB
+        >
           <a href="https://www.netflix.com/br/" target="_blank" rel="noopener noreferrer">
            <img alt="Netflix" width="18" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Netflix_2015_N_logo.svg/1200px-Netflix_2015_N_logo.svg.png"/>
           </a>
@@ -94,6 +87,7 @@ function Home() {
       </footer>
       
       {
+        //Hahahaha dit is dat laad gifje hehehehe als je iets in de pagina laad
         movieList.length <= 0 &&
         <div className="loading">
           <img alt="Carregando" src="https://i.imgflip.com/59mzsv.gif"/>

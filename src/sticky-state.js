@@ -1,3 +1,4 @@
+// gekopieerd van https://www.joshwcomeau.com/snippets/react-hooks/use-sticky-state/
 import React from 'react';
 
 export function useStickyState(defaultValue, key) {

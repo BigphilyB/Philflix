@@ -68,7 +68,7 @@
   opacity: 0.7;
 }
 
-.details--viewtrailer {
+.details--viewtrailer, .details--addtolist {
     background-color: #FFF;
     color: #000;
 }
